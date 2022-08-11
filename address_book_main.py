@@ -71,10 +71,54 @@ def Storing_contacts_in_data():
             break
     return contacts_data
 
+def Editing_contacts(contact_data_list):
+    """
+        Description: Editing Contact Details form Console
+        Parameters: None
+        Returns: Returns a list containing objects
+    """
+    edited_person_name = input("Enter the name of person, whom details you want to edit: ").upper()
+    try:
+        for item in contact_data_list:
+            if item.first_name.upper() == edited_person_name:
+                choice = input(
+                    "Enter choice u want to edit:\n 1 : FN,2 : LN,3 : Address,4 : City,5 : State,6 : ZIP,7 : Phone,8 : Email")
+                if (choice == "1"):
+                    fn = input("Enter updated first name: ")
+                    item.first_name = fn
+                elif (choice == "2"):
+                    ln = input("Enter updated last name: ")
+                    item.last_name = ln
+                elif (choice == "3"):
+                    addrs = input("Enter updated address: ")
+                    item.address = addrs
+                elif (choice == "4"):
+                    city = input("Enter updated city: ")
+                    item.city = city
+                elif (choice == "5"):
+                    state = input("Enter updated state: ")
+                    item.state = state
+                elif (choice == "6"):
+                    zip = input("Enter updated zip: ")
+                    item.zip = zip
+                elif (choice == "7"):
+                    phn_no = input("Enter updated phn number: ")
+                    item.phone_number = phn_no
+                elif (choice == "8"):
+                    email = input("Enter updated email: ")
+                    item.email = email
+                else:
+                    print("Invalid Choice")
+    except Exception as ex:
+        print(ex)
+
 
 if __name__ == "__main__":
     contacts_data = []
     Storing_contacts_in_data()
+    user_choice = input("Do u want to edit Contacts \"Y\" OR \"N\":").upper()
+    if (user_choice.upper() == "Y"):
+        Editing_contacts(contacts_data)
     for item in contacts_data:
         print() # Blank line
         print(str(item))
