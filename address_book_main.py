@@ -71,6 +71,7 @@ def Storing_contacts_in_data():
             break
     return contacts_data
 
+
 def Editing_contacts(contact_data_list):
     """
         Description: Editing Contact Details form Console
@@ -82,7 +83,7 @@ def Editing_contacts(contact_data_list):
         for item in contact_data_list:
             if item.first_name.upper() == edited_person_name:
                 choice = input(
-                    "Enter choice u want to edit:\n 1 : FN,2 : LN,3 : Address,4 : City,5 : State,6 : ZIP,7 : Phone,8 : Email")
+                    "Enter choice u want to edit:\n 1 : FirstName,2 : LastName,3 : Address,4 : City,5 : State,6 : ZIP,7 : Phone,8 : Email")
                 if (choice == "1"):
                     fn = input("Enter updated first name: ")
                     item.first_name = fn
@@ -113,13 +114,39 @@ def Editing_contacts(contact_data_list):
         print(ex)
 
 
+def Delete_Contact(contact_data_list):
+    """
+            Description: Deleting Contact Details form Console
+            Parameters: None
+            Returns: Returns a list containing remainder objects
+        """
+    edited_person_name = input("Enter the name of person, whom details you want to edit: ").upper()
+    try:
+        for item in contact_data_list:
+            if item.first_name.upper() == edited_person_name:
+                choice = input(
+                    "Enter choice u want to delete:\n 1 : Delete")
+                if choice == "1":
+                    contact_data_list.remove(item)
+                else:
+                    print("Invalid Choice")
+            else:
+                print("The name entered by you does not exist in Contacts list")
+
+    except Exception as ex:
+        print(ex)
+
+
 if __name__ == "__main__":
     contacts_data = []
     Storing_contacts_in_data()
     user_choice = input("Do u want to edit Contacts \"Y\" OR \"N\":").upper()
-    if (user_choice.upper() == "Y"):
+    if user_choice.upper() == "Y":
         Editing_contacts(contacts_data)
+    user_choice_to_delete = input("Do you want to delete contact? \"Y\" OR \"N\":").upper()
+    if user_choice_to_delete == "Y":
+        Delete_Contact(contacts_data)
     for item in contacts_data:
-        print() # Blank line
+        print()  # Blank line
         print(str(item))
-        print() # Blank line
+        print()  # Blank line
