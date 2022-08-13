@@ -27,7 +27,7 @@ def add_contact():
     return contact_obj
 
 
-def Storing_contacts_in_data():
+def Storing_contacts_in_data(contacts_data):
     """
            Description: Adding Contact Details form Console in list
            Parameters: None
@@ -109,16 +109,13 @@ def Delete_Contact(contact_data_list):
         print(ex)
 
 
-if __name__ == "__main__":
+def contacts_list_maker():
     contacts_data = []
-    Storing_contacts_in_data()
+    Storing_contacts_in_data(contacts_data)
     user_choice = input("Do u want to edit Contacts \"Y\" OR \"N\":").upper()
     if user_choice.upper() == "Y":
         Editing_contacts(contacts_data)
     user_choice_to_delete = input("Do you want to delete contact? \"Y\" OR \"N\":").upper()
     if user_choice_to_delete == "Y":
         Delete_Contact(contacts_data)
-    for item in contacts_data:
-        print()  # Blank line
-        print(str(item))
-        print()  # Blank line
+    return contacts_data
