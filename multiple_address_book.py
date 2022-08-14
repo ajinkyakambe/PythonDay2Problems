@@ -1,14 +1,11 @@
 # Importing Address Book
 import address_book
 
-#exception class
+# exception class
 from address_book_exception import AddressBookException
 
-# Importing Contacts Class
-from contacts import Contacts
 
-
-def adding_contactsdata_in_dictonary(addressbook_dict):
+def adding_contactsdata_in_dictionary(addressbook_dict):
     """
         Description: Adding Address Book & Contact Details in Dictionary
         Parameters: addressbook_dict : The dictionary in which all these contacts details to be stored
@@ -28,12 +25,22 @@ def adding_contactsdata_in_dictonary(addressbook_dict):
                 break
     except Exception as ex:
         print(ex)
-        adding_contactsdata_in_dictonary(addressbook_dict)
+        adding_contactsdata_in_dictionary(addressbook_dict)
+
+def search_person_in_a_city_state(searching_dict):
+    entered_city_or_state = input(
+        "Please enter a city or state for searching a person: ")
+    for key, value in searching_dict.items():
+        for item in value:
+            if (item.city == entered_city_or_state or item.state == entered_city_or_state):
+                print("The person, you searched for, belongs to ",
+                      entered_city_or_state, " & is from this ", key, " address book: ")
+                print(str(item))
 
 
 if __name__ == "__main__":
     address_book_dict = {}
-    adding_contactsdata_in_dictonary(address_book_dict)
+    adding_contactsdata_in_dictionary(address_book_dict)
     for key, value in address_book_dict.items():
         print("Address Book Name is: ", key)
         for item in value:
