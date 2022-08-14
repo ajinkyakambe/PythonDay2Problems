@@ -1,6 +1,7 @@
 # Start of Address Book Program
 
 # Importing Contacts Class
+from address_book_exception import AddressBookException
 from contacts import Contacts
 
 
@@ -35,6 +36,10 @@ def Storing_contacts_in_data(contacts_data):
     """
     while (True):
         contact_obj = add_contact()
+        for item in contacts_data:
+            if item.first_name == contact_obj.first_name and item.last_name == contact_obj.last_name:
+                raise AddressBookException(
+                    "The entered Full name i.e. first name and last name already exists in particular address Book")
         contacts_data.append(contact_obj)
         contacts_to_add_choice = input(
             "Enter \"Y\" for adding more & \"N\" to stop adding: ")

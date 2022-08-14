@@ -1,6 +1,9 @@
 # Importing Address Book
 import address_book
 
+#exception class
+from address_book_exception import AddressBookException
+
 # Importing Contacts Class
 from contacts import Contacts
 
@@ -14,6 +17,9 @@ def adding_contactsdata_in_dictonary(addressbook_dict):
     try:
         while True:
             name_of_address_book = input("Enter the name of addressBook: ")
+            for book_name in addressbook_dict.keys():
+                if book_name == name_of_address_book:
+                    raise AddressBookException("This addressBook name already exists")
             list_of_particular_addressbook = address_book.contacts_list_maker()
             addressbook_dict[name_of_address_book] = list_of_particular_addressbook
             choice = input(
