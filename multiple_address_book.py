@@ -4,6 +4,12 @@ import address_book
 # exception class
 from address_book_exception import AddressBookException
 
+# Importing reduce from functools module inbuild
+from functools import reduce
+
+# importing operator for operator functions
+import operator
+
 
 def adding_contactsdata_in_dictionary(addressbook_dict):
     """
@@ -61,30 +67,82 @@ def dictionary_of_state_and_person(searching_dict):
         print(ex)
 
 
+def sorting_entries_by_person_name(address_book_dict):
+    # https://www.w3schools.com/python/python_lambda.asp
+    try:
+        contacts_list = list(address_book_dict.values())
+        sorted_list = reduce(lambda x, y: x + y, contacts_list)
+
+        # sorted_list = reduce(operator.add, contacts_list)
+        sorted_list.sort(key=lambda x: x.first_name)
+        return sorted_list
+    except Exception as ex:
+        print(ex)
+
+
+def printing_details_on_console(list_to_be_printed):
+    print(space)
+    for item in list_to_be_printed:
+        print(str(item))
+    print(space)
+
+
+# Global space variable
+space = "|---------------------------|"
+
 if __name__ == "__main__":
     address_book_dict = {}
-    adding_contactsdata_in_dictionary(address_book_dict)
-    for key, value in address_book_dict.items():
-        print("==========================")
-        print("Address Book Name is: ", key)
-        for item in value:
-            print(str(item))
-        print("==========================")
+    while True:
+        user_input = int(input(
+            "\"1\" for adding Contact Details...\n\
+            \"2\" for searching the person in city or state...\n\
+            \"3\" for viewing person from a city...\n\
+            \"4\" for viewing person from a state...\n\
+            \"5\" for sorting person by first name...\n\
+            \"ANY OTHER KEY\" for exiting..."
+        ))
 
-    # Will be displaying the dic of person by city and state
-    print("==========================")
-    city_person_dict = dictionary_of_city_and_person(address_book_dict)
-    for key, value in city_person_dict.items():
-        print(
-            f"Total Number of Persons residing in {key} city are: {len(value)} and details of those are: ")
-        for each_contact in value:
-            print(str(each_contact))
+        if user_input == 1:
+            adding_contactsdata_in_dictionary(address_book_dict)
+            for key, value in address_book_dict.items():
+                print(space)
+                print("Address Book Name is: ", key)
+                # calling the printing function
+                printing_details_on_console(value)
+            continue
 
-    print("==========================")
-    state_person_dict = dictionary_of_state_and_person(address_book_dict)
-    for key, value in state_person_dict.items():
-        print(
-            f"Total Number of Persons residing in {key} state are: {len(value)} and details of those are: ")
-        for each_contact in value:
-            print(str(each_contact))
-    print("==========================")
+        if user_input == 2:
+            # Will be displaying the dic of person by city and state
+            city_person_dict = dictionary_of_city_and_person(address_book_dict)
+            continue
+
+        if user_input == 3:
+            city_person_dict = dictionary_of_city_and_person(address_book_dict)
+            for key, value in city_person_dict.items():
+                print(
+                    f"Total Number of Persons residing in {key} city are: {len(value)} and details of those are: ")
+                printing_details_on_console(value)
+            continue
+
+        if user_input == 4:
+            state_person_dict = dictionary_of_state_and_person(address_book_dict)
+            for key, value in state_person_dict.items():
+                print(
+                    f"Total Number of Persons residing in {key} state are: {len(value)} and details of those are: ")
+                printing_details_on_console(value)
+            continue
+
+        if user_input == 5:
+            sorted_name_list = sorting_entries_by_person_name(address_book_dict)
+            printing_details_on_console(sorted_name_list)
+            continue
+
+        if user_input is not 1 or 2 or 3 or 4 or 5:
+            break
+
+
+
+
+
+
+
