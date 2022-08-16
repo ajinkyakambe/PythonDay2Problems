@@ -65,18 +65,26 @@ if __name__ == "__main__":
     address_book_dict = {}
     adding_contactsdata_in_dictionary(address_book_dict)
     for key, value in address_book_dict.items():
+        print("==========================")
         print("Address Book Name is: ", key)
         for item in value:
             print(str(item))
+        print("==========================")
 
     # Will be displaying the dic of person by city and state
-    cityperson_dict = dictionary_of_city_and_person(address_book_dict)
-    for key, value in cityperson_dict.items():
-        print("Persons residing in ", key, " city are:")
+    print("==========================")
+    city_person_dict = dictionary_of_city_and_person(address_book_dict)
+    for key, value in city_person_dict.items():
+        print(
+            f"Total Number of Persons residing in {key} city are: {len(value)} and details of those are: ")
         for each_contact in value:
             print(str(each_contact))
-    stateperson_dict = dictionary_of_state_and_person(address_book_dict)
-    for key, value in stateperson_dict.items():
-        print("Persons residing in ", key, " state are:")
+
+    print("==========================")
+    state_person_dict = dictionary_of_state_and_person(address_book_dict)
+    for key, value in state_person_dict.items():
+        print(
+            f"Total Number of Persons residing in {key} state are: {len(value)} and details of those are: ")
         for each_contact in value:
             print(str(each_contact))
+    print("==========================")
